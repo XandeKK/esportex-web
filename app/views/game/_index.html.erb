@@ -1,0 +1,35 @@
+<%= turbo_frame_tag "#{sport}" do %>
+	<% games.each_with_index do |game, i| %>
+		<%= link_to game_path(game), data: { turbo_frame: :_top, turbo: false } do %>
+		
+			<!-- If item is last  -->
+			<% if games.size - 1 == i %>
+				<li class="list-group-item list-group-item-action list-group-item-primary rounded-bottom-20">
+			<% else %>
+				<li class="list-group-item list-group-item-action list-group-item-primary">
+			<% end %>
+
+				<div class="ms-2 me-auto row">
+					<div class="col">
+						<div>
+							<span class="fw-bold"> Name: </span> <%= game.user.name %>
+						</div>
+						<div>
+							<span class="fw-bold"> Address </span>: <%= game.address %>
+						</div>
+					</div>
+					<div class="col">
+						<div>
+							<span class="fw-bold"> Start </span>: <%= game.start_date.strftime("%I:%M%p") %> -
+							<%= game.start_date.to_date %>
+						</div>
+						<div>
+							<span class="fw-bold"> End </span>: <%= game.end_date.strftime("%I:%M%p") %> -
+							<%= game.end_date.to_date %>
+						</div>
+					</div>
+				</div>
+			</li>
+		<% end %>
+	<% end %>
+<% end %>
