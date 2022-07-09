@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  sport: one
+  start_date: 2022-07-05 07:37:53
+  end_date: 2022-08-05 08:37:54
+  localization: 'POINT(-122 30)'
+  address: La
+  info: Opa
+
+two:
+  user: two
+  sport: one
+  start_date: 2022-07-05 07:37:53
+  end_date: 2022-08-05 08:37:54
+  localization: 'POINT(-90 10)'
+  address: Monstro
+  info: Quase
