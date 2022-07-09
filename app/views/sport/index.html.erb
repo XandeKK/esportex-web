@@ -1,0 +1,15 @@
+<%= stylesheet_link_tag "sport" %>
+
+<div class="container mb-5">
+	<div class="text-end">
+		<%= link_to "Create game", new_game_path, class: "btn btn-success mt-3", data: {turbo: 'false'} %>
+	</div>
+	
+	<ul class="list-group mt-2">
+		<% @sports.each do |sport|%>
+			<%= render partial: "sport", locals: { sport: sport }%>
+		<% end %>
+	</ul>
+</div>
+
+<%=  javascript_include_tag "sport" %>

@@ -1,0 +1,8 @@
+.rounded-top-20 {
+	border-top-right-radius: 20px!important;
+	border-top-left-radius: 20px!important;
+}
+.rounded-bottom-20 {
+	border-bottom-right-radius: 20px!important;
+	border-bottom-left-radius: 20px!important;
+}
