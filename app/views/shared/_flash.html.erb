@@ -1,0 +1,29 @@
+<style type="text/css">
+	#flash {
+	  opacity: 1;
+	  transition: opacity 0.4s ease-in-out;
+	}
+
+	#flash.fade {
+	  opacity: 0;
+	  display: none;
+	}
+</style>
+
+<div class="position-absolute end-0" style="margin-top: 10px; margin-right: 10px; z-index: 999;" id="flash">
+	<% if flash[:notice] %>
+		<div class="alert alert-primary d-flex align-items-center" role="alert">
+		  <div>
+		   	<%= flash[:notice] %>
+		  </div>
+		</div>
+	<% end %>
+
+	<% if flash[:alert] %>
+		<div class="alert alert-warning d-flex align-items-center" role="alert">
+		  <div>
+		    <%= flash[:alert] %>
+		  </div>
+		</div>
+	<% end %>
+</div>

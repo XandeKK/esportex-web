@@ -1,0 +1,13 @@
+<div class="modal fade" id="ModalDelete" tabindex="-1" aria-labelledby="ModalDelete" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalDelete">Are you sure?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+          <%= button_to "Yes", destroy_game_path(game), class: "btn btn-danger", 'data-bs-dismiss':"modal", method: :delete, data: { turbo: false } if game.is_it_from_the_user? %>
+      </div>
+    </div>
+  </div>
+</div>
