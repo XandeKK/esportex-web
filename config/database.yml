@@ -85,7 +85,7 @@ test:
 production:
   <<: *default
   adapter: postgis
-  url: <%= ENV.fetch("DATABASE_URL").gsub(/postgres/, 'postgis') %>
+  # url: <%= %># ENV.fetch("DATABASE_URL").gsub(/postgres/, 'postgis') %>
   database: esportex_production
   username: esportex
   password: <%= ENV["ESPORTEX_DATABASE_PASSWORD"] %>
