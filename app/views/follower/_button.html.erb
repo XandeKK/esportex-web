@@ -1,0 +1,7 @@
+<%= turbo_frame_tag "button" do %>
+	<% if Follower.exists?( user_id: Current.user[:id], follower_id: user ) %>
+		<%= button_to "Unfollow", unfollow_user_path(user), method: :delete, class: "btn btn-dark" %> 
+	<% else %>	
+		<%= button_to "Follow", follow_user_path(user), class: "btn btn-dark" %> 
+	<% end %>
+<% end %>

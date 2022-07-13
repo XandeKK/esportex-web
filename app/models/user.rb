@@ -2,6 +2,8 @@ class User < ApplicationRecord
   has_secure_password
   has_one_attached :avatar
   has_many :games, dependent: :destroy
+  has_many :followers, class_name: "Follower", foreign_key: :follower_id, dependent: :delete_all
+  has_many :users, class_name: "Follower", foreign_key: :user_id, dependent: :delete_all
 
   validates :name, presence: true, length: { in: 3..20 }
   validates :username, presence: true, uniqueness: true, length: { in: 3..20 } # Colocar regex

@@ -18,3 +18,13 @@ two:
   bio: friend
   password_reset_token: friend
   password_reset_sent_at: <%= Date.yesterday %>
+
+
+three:
+  email: friend3@example.com
+  name: friend3
+  username: friend3
+  password_digest: <%= BCrypt::Password.create('friend3')%>
+  bio: friend3
+  password_reset_token: friend3
+  password_reset_sent_at: <%= Date.yesterday %>

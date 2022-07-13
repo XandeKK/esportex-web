@@ -15,15 +15,29 @@
                 @<%= @user.username%>
               </p>
             </div>
+            <div class="ms-auto d-flex flex-column align-items-end">
+              <div class="me-1 my-2">
+                <a class="btn btn-info"><i class="fa fa-paper-plane" aria-hidden="true"></i></a>
+              </div>
+              <div class="me-1 mb-2">
+                <%= turbo_frame_tag "button" do %>
+                  <%= render partial: "follower/button", locals: { user: @user.id } if @user.id != Current.user[:id] %>
+                <% end %>
+              </div>
+            </div>
           </div>
           <div class="mb-4 p-4 text-black" style="background-color: #f8f9fa;">
             <div class="d-flex justify-content-end text-center py-1">
               <div class="px-3">
-                <p class="mb-1 h5">0</p>
+                <p class="mb-1 h5">
+                  <%= @followers %>
+                </p>
                 <p class="small text-muted mb-0">Followers</p>
               </div>
               <div>
-                <p class="mb-1 h5">0</p>
+                <p class="mb-1 h5">
+                  <%= @following %>
+                </p>
                 <p class="small text-muted mb-0">Following</p>
               </div>
             </div>

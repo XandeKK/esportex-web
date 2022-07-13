@@ -3,6 +3,8 @@ class ProfileController < ApplicationController
   
   def show
     @user = User.find_by_username(params[:profile])
+    @following = Follower.where(user_id: @user ).count
+    @followers = Follower.where( follower_id: @user).count
 
     if @user.nil?
       redirect_to root_path, alert: "User don't exist"

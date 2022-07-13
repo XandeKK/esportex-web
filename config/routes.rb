@@ -27,4 +27,7 @@ Rails.application.routes.draw do
   delete 'destroy/game/:id', to: 'game#destroy', as: 'destroy_game'
 
   get 'map/games', to: 'map#show'
+
+  post 'follow_user/:user', to: 'follower#create', as: 'follow_user'
+  delete 'unfollow_user/:user', to: 'follower#destroy', as: 'unfollow_user'
 end
