@@ -25,11 +25,8 @@ O projeto foi criado, porque eu sou um das pessoas que queria jogar um esporte, 
 
 ## ⚙️ Funcionalidades
 
-- [x] Login/Signup com Email
-- [x] Esqueci a senha
-- [x] Mudar senha
 - [x] Seguir/Seguindo outros usuário
-- [x] Criar um jogo
+- [x] Criar uma partida
 - [x] Um mapa para visualizar as localizações dos jogos
 - [ ] Chat
 - [ ] Compartilhar os jogos em outras redes sociais
