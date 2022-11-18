@@ -30,6 +30,14 @@ gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 gem "redis", "~> 4.0"
 
+# Rails authentication with email & password.
+gem "clearance"
+
+# A framework for building reusable, testable & encapsulated view components in Ruby on Rails.
+gem "view_component"
+
+gem "terser"
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
