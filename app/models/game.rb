@@ -1,4 +1,6 @@
 class Game < ApplicationRecord
+  has_many :game_participants, class_name: "Game::Participant", dependent: :destroy
+  
   belongs_to :user
   belongs_to :sport
 

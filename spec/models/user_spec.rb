@@ -4,6 +4,7 @@ describe User, type: :model do
   subject { build(:user) }
 
   it { should have_many(:games).dependent(:destroy) }
+  it { should have_many(:game_participants).dependent(:destroy) }
 
   it { should validate_presence_of(:name) }
 

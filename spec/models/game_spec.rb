@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe Game, type: :model do
   subject { build(:game) }
 
+  it { should have_many(:game_participants).dependent(:destroy) }
+
   it { should belong_to(:user) }
   it { should belong_to(:sport) }
 
