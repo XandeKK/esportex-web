@@ -3,7 +3,8 @@ class User < ApplicationRecord
 
   has_many :games, dependent: :destroy
   has_many :game_participants, class_name: "Game::Participant", dependent: :destroy
-
+  has_many :game_comments, class_name: "Game::Comment", dependent: :destroy
+  
   validates :name, presence: true, length: { maximum: 80 }
   validates :username, presence: true, length: { maximum: 36 },
     format: { with: /\A[a-zA-Z0-9\-_]+\z/,
