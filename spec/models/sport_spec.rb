@@ -2,12 +2,7 @@ require 'rails_helper'
 
 describe Sport, type: :model do
   describe "Validations" do
-    subject {
-      Sport.new(
-        name: "Volei",
-        description: "See haikyuu!"
-      )
-    }
+    subject { build(:sport) }
 
     it { should validate_presence_of(:name) }
     it { should validate_uniqueness_of(:name).case_insensitive }
@@ -19,11 +14,6 @@ describe Sport, type: :model do
   end
 
   it "is valid with valid attributes" do
-    sport = Sport.new(
-      name: "Basquete",
-      description: "See slam dunk!"
-    )
-
-    expect(sport).to be_valid
+    expect(build(:sport)).to be_valid
   end
 end

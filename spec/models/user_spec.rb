@@ -2,12 +2,7 @@ require 'rails_helper'
 
 describe User, type: :model do
   describe "Validations" do
-    subject { described_class.new(name: "fulano",
-      username: "fulano",
-      email: "fulano@email",
-      password: "fulano",
-      bio: "eu sou o fulano"
-    ) }
+    subject { build(:user) }
 
     it { should validate_presence_of(:name) }
 
@@ -34,14 +29,6 @@ describe User, type: :model do
   end
 
   it "is valid with valid attributes" do
-    user = described_class.new(
-      name: "fulano",
-      username: "fulano",
-      email: "fulano@email",
-      password: "fulano",
-      bio: "eu sou o fulano"  
-    )
-
-    expect(user).to be_valid
+    expect(build(:user)).to be_valid
   end
 end
