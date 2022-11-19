@@ -2,99 +2,46 @@ require 'rails_helper'
 
 describe User, type: :model do
   describe "Validations" do
-    subject {
-      described_class.new(
-        name: "fulano",
-        username: "fulano",
-        email: "fulano@email",
-        password: "fulano",
-        bio: "eu sou o fulano"
-      )
-    }
+    subject { described_class.new(name: "fulano",
+      username: "fulano",
+      email: "fulano@email",
+      password: "fulano",
+      bio: "eu sou o fulano"
+    ) }
 
-    it "is valid with valid attributes" do
-      expect(subject).to be_valid
-    end
+    it { should validate_presence_of(:name) }
 
-    it "is valid without a bio" do
-      subject.bio = nil
-      expect(subject).to be_valid
-    end
+    it { should_not allow_value("").for(:name) }
+    it { should_not validate_length_of(:name).is_at_most(81) }
 
-    context "of all bad name" do
-      it "is not valid without a name" do
-        subject.name = nil
-        expect(subject).to_not be_valid
-      end
+    it { should validate_presence_of(:username) }
 
-      it "is not valid with a name greater than 80 characters" do
-        subject.name = "sofri" * 17
-        expect(subject).to_not be_valid
-      end
-    end
+    it { should allow_value("alexadre_dosa").for(:username) }
+    it { should allow_value("xande--kk").for(:username) }
+    it { should allow_value("123").for(:username) }
 
+    it { should_not allow_value("").for(:username) }
+    it { should_not allow_value("|velho_arrombado|").for(:username) }
+    it { should_not allow_value("123+456").for(:username) }
+    it { should_not allow_value("koo#").for(:username) }
+    it { should_not allow_value("nao funciona").for(:username) }
+    it { should_not validate_length_of(:username).is_at_most(37) }
 
-    context "of all good username" do
-      it do
-        subject.username = "alexadre_dosa"
-        expect(subject).to be_valid
-      end
+    it { should validate_uniqueness_of(:username).case_insensitive }
 
-      it do
-        subject.username = "xandekk-2"
-        expect(subject).to be_valid
-      end
+    it { should allow_value("").for(:bio) }
+    it { should_not validate_length_of(:bio).is_at_most(501) }
+  end
 
-      it do
-        subject.username = "comi_o_cu_de_quem_esta_lendo"
-        expect(subject).to be_valid
-      end
-    end
+  it "is valid with valid attributes" do
+    user = described_class.new(
+      name: "fulano",
+      username: "fulano",
+      email: "fulano@email",
+      password: "fulano",
+      bio: "eu sou o fulano"  
+    )
 
-    context "of all bad username" do
-      it "is not valid without an username" do
-        subject.username = nil
-        expect(subject).to_not be_valid
-      end
-
-      it "is not valid with an username greater than 36 characters" do
-        subject.username = "fulano" * 7
-        expect(subject).to_not be_valid
-      end
-
-      it do
-        subject.username = "||...||"
-        expect(subject).to_not be_valid
-      end
-
-      it do
-        subject.username = "opa-+2?"
-        expect(subject).to_not be_valid
-      end
-
-      it do
-        subject.username = "mas#k#koo"
-        expect(subject).to_not be_valid
-      end
-
-      it do
-        subject.username = "mas que porra"
-        expect(subject).to_not be_valid
-      end
-    end
-
-    it "is not valid with existing name" do
-      subject.save
-      
-      user_1  = described_class.new(
-        name: "fulano_1",
-        username: "fulano",
-        email: "fulano_1@email",
-        password: "fulano_1",
-        bio: "eu sou o fulano 1"
-      )
-
-      expect(user_1).to_not be_valid
-    end
+    expect(user).to be_valid
   end
 end

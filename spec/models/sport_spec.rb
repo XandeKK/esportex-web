@@ -1,43 +1,29 @@
 require 'rails_helper'
 
 describe Sport, type: :model do
-  subject {
-    Sport.new(
-      name: "Volei",
-      description: "See haikyuu!"
-    )
-  }
+  describe "Validations" do
+    subject {
+      Sport.new(
+        name: "Volei",
+        description: "See haikyuu!"
+      )
+    }
+
+    it { should validate_presence_of(:name) }
+    it { should validate_uniqueness_of(:name).case_insensitive }
+    it { should_not allow_value("").for(:name) }
+    it { should_not validate_length_of(:name).is_at_most(27) }
+
+    it { should allow_value("").for(:description) }
+    it { should_not validate_length_of(:description).is_at_most(501) }
+  end
 
   it "is valid with valid attributes" do
-    expect(subject).to be_valid
-  end
+    sport = Sport.new(
+      name: "Basquete",
+      description: "See slam dunk!"
+    )
 
-  it "is valid without description" do
-    expect(subject).to be_valid
-  end
-
-  it "is not valid with description greater than 500" do
-    subject.name = "Nada mesmo faz sentido" * 23
-    expect(subject).to_not be_valid
-  end
-
-  context "of all bad name" do
-    it "is not valid without a name" do
-      subject.name = nil
-      expect(subject).to_not be_valid
-    end
-
-    it "is not valid with a name greater than 26" do
-      subject.name = "Super onze" * 3
-      expect(subject).to_not be_valid
-    end
-  end
-
-  it "is not valid with existing name" do
-    subject.save
-
-    sport = Sport.new name: "Volei"
-
-    expect(sport).to_not be_valid
+    expect(sport).to be_valid
   end
 end
