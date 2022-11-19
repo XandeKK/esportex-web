@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_19_194530) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_19_202523) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,6 +19,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_19_194530) do
     t.text "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "chat_rooms", force: :cascade do |t|
+    t.string "name", limit: 50, null: false
+    t.string "bio", limit: 500
+    t.bigint "chat_category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_category_id"], name: "index_chat_rooms_on_chat_category_id"
   end
 
   create_table "game_comments", force: :cascade do |t|
@@ -76,6 +85,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_19_194530) do
     t.index ["remember_token"], name: "index_users_on_remember_token", unique: true
   end
 
+  add_foreign_key "chat_rooms", "chat_categories"
   add_foreign_key "game_comments", "games"
   add_foreign_key "game_comments", "users"
   add_foreign_key "game_participants", "games"
