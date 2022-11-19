@@ -10,5 +10,7 @@ RSpec.describe Chat::Participant, type: :model do
     should validate_inclusion_of(:role).in_array(%w(Admin Normal Reader))
   end
 
-  it { expect(subject).to be_valid }
+  it "is valid with valid attributes" do
+    expect(subject).to be_valid
+  end
 end

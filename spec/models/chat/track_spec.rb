@@ -8,5 +8,7 @@ RSpec.describe Chat::Track, type: :model do
 
   it { should allow_value(DateTime.now).for(:last_view) }
 
-  it { expect(subject).to be_valid }
+  it "is valid with valid attributes" do
+    expect(subject).to be_valid
+  end
 end

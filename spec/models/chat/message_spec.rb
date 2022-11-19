@@ -8,5 +8,7 @@ RSpec.describe Chat::Message, type: :model do
 
   it { should validate_presence_of(:message) }
 
-  it { expect(subject).to be_valid }
+  it "is valid with valid attributes" do
+    expect(subject).to be_valid
+  end
 end
