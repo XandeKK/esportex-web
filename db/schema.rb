@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_19_203929) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_19_214231) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,6 +19,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_19_203929) do
     t.text "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "chat_messages", force: :cascade do |t|
+    t.bigint "chat_room_id", null: false
+    t.bigint "chat_participant_id", null: false
+    t.text "message", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_participant_id"], name: "index_chat_messages_on_chat_participant_id"
+    t.index ["chat_room_id"], name: "index_chat_messages_on_chat_room_id"
   end
 
   create_table "chat_participants", force: :cascade do |t|
@@ -95,6 +105,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_19_203929) do
     t.index ["remember_token"], name: "index_users_on_remember_token", unique: true
   end
 
+  add_foreign_key "chat_messages", "chat_participants"
+  add_foreign_key "chat_messages", "chat_rooms"
   add_foreign_key "chat_participants", "chat_rooms"
   add_foreign_key "chat_participants", "users"
   add_foreign_key "chat_rooms", "chat_categories"
