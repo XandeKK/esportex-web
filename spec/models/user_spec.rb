@@ -82,5 +82,19 @@ describe User, type: :model do
         expect(subject).to_not be_valid
       end
     end
+
+    it "is not valid with existing name" do
+      subject.save
+      
+      user_1  = described_class.new(
+        name: "fulano_1",
+        username: "fulano",
+        email: "fulano_1@email",
+        password: "fulano_1",
+        bio: "eu sou o fulano 1"
+      )
+
+      expect(user_1).to_not be_valid
+    end
   end
 end
