@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_19_214231) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_19_220534) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,6 +48,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_19_214231) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["chat_category_id"], name: "index_chat_rooms_on_chat_category_id"
+  end
+
+  create_table "chat_tracks", force: :cascade do |t|
+    t.bigint "chat_room_id", null: false
+    t.bigint "chat_participant_id", null: false
+    t.datetime "last_view"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_participant_id"], name: "index_chat_tracks_on_chat_participant_id"
+    t.index ["chat_room_id"], name: "index_chat_tracks_on_chat_room_id"
   end
 
   create_table "game_comments", force: :cascade do |t|
@@ -110,6 +120,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_19_214231) do
   add_foreign_key "chat_participants", "chat_rooms"
   add_foreign_key "chat_participants", "users"
   add_foreign_key "chat_rooms", "chat_categories"
+  add_foreign_key "chat_tracks", "chat_participants"
+  add_foreign_key "chat_tracks", "chat_rooms"
   add_foreign_key "game_comments", "games"
   add_foreign_key "game_comments", "users"
   add_foreign_key "game_participants", "games"
