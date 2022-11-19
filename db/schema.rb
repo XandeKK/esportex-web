@@ -10,9 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_19_104944) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_19_182851) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "games", force: :cascade do |t|
+    t.string "title", limit: 100, default: ""
+    t.datetime "start_date", null: false
+    t.datetime "end_date", null: false
+    t.string "address", null: false
+    t.string "info", limit: 500
+    t.bigint "user_id", null: false
+    t.bigint "sport_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sport_id"], name: "index_games_on_sport_id"
+    t.index ["user_id"], name: "index_games_on_user_id"
+  end
 
   create_table "sports", force: :cascade do |t|
     t.string "name", limit: 26, null: false
@@ -36,4 +50,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_19_104944) do
     t.index ["remember_token"], name: "index_users_on_remember_token", unique: true
   end
 
+  add_foreign_key "games", "sports"
+  add_foreign_key "games", "users"
 end
