@@ -17,5 +17,5 @@ Rails.application.routes.draw do
   get '/home', to: 'home#index'
 
   get '/sport', to: redirect('/sports')
-  get '/sports', to: 'sport#index'
+  get '/sports', to: 'sports#index'
 end

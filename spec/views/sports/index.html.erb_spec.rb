@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe "sport/index.html.erb", type: :view do
+RSpec.describe "sports/index.html.erb", type: :view do
   # pending "add some examples to (or delete) #{__FILE__}"
 end

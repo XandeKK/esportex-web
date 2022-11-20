@@ -8,7 +8,7 @@ RSpec.describe "Sports", type: :request do
       expect(response).to have_http_status(:moved_permanently)
     end
 
-    it "returns http success" do
+    it "returns sports page" do
       get "/sports"
       expect(response).to have_http_status(:success)
     end
