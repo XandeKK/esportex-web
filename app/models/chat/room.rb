@@ -10,4 +10,22 @@ class Chat::Room < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :bio, length: { maximum: 500 }
+
+  def join_room user
+    # return :full if full?
+    if participating?(user)
+      :participating
+    else
+      :successfully_joined if self.chat_participants.create!(user: user)
+    end
+  end
+
+  private
+
+  def participating? user
+    self.chat_participants.find_by(user: user)
+  end
+
+  # def full?
+  # end
 end
