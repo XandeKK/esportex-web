@@ -11,4 +11,25 @@ class Game < ApplicationRecord
   validates :start_date, presence: true, comparison: { less_than: :end_date }
   validates :end_date, presence: true, comparison: { greater_than: :start_date }
 
+  def status timezone
+    time = Time.find_zone(timezone)
+    
+    return :will_happen if will_happen?(time)
+    return :happened if happened?(time)
+    return :over if over?(time)
+  end
+
+  private
+
+  def will_happen? time
+    time.now < self.start_date
+  end
+
+  def happened? time
+    time.now >= self.start_date && time.now < self.end_date
+  end
+
+  def over? time
+    time.now > self.end_date
+  end
 end
