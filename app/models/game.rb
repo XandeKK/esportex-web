@@ -1,4 +1,6 @@
 class Game < ApplicationRecord
+  after_save :add_organizer_game
+
   has_many :game_participants, class_name: "Game::Participant", dependent: :destroy
   has_many :game_comments, class_name: "Game::Comment", dependent: :destroy
   
@@ -14,9 +16,20 @@ class Game < ApplicationRecord
   def status timezone
     time = Time.find_zone(timezone)
     
+    return :invalid_timezone if time.nil?
+    
     return :will_happen if will_happen?(time)
     return :happened if happened?(time)
     return :over if over?(time)
+  end
+
+  def join_game user
+    # return :full if full?
+    if participating?(user)
+      :participating
+    else
+      :successfully_joined if self.game_participants.create!(user: user)
+    end
   end
 
   private
@@ -32,4 +45,16 @@ class Game < ApplicationRecord
   def over? time
     time.now > self.end_date
   end
+
+  def participating? user
+    self.game_participants.find_by(user: user)
+  end
+
+  def add_organizer_game
+    join_game self.user
+  end
+
+  # def full?
+  #   self.game_participants.count == self.maximum
+  # end
 end

@@ -62,5 +62,56 @@ RSpec.describe Game, type: :model do
 
       expect(game.status(Time.zone)).to eq(:over)
     end
+
+    it "returns :invalid_timezone with invalid argument" do
+      game = create(:game)
+      expect(game.status("")).to eq(:invalid_timezone)
+    end
+
+    it "returns happened with string argument" do
+      game = create(:game)
+      expect(game.status("UTC")).to eq(:happened)
+    end
+  end
+
+  describe "#join_game" do
+    it "returns :successfully_joined" do
+      game = create(:game)
+      user = create(:user)
+
+      result = game.join_game(user)
+
+      expect(result).to eq(:successfully_joined)
+    end
+
+    it "returns :participating" do
+      game = create(:game)
+
+      result = game.join_game(game.user)
+
+      expect(result).to eq(:participating)
+    end
+
+    it "raises ArgumentError without user" do
+      game = create(:game)
+
+      expect { game.join_game }.to raise_error(ArgumentError)
+    end
+
+    it "raises ActiveRecord::AssociationTypeMismatch with invalid argument" do
+      game = create(:game)
+
+      expect { game.join_game("sou eu trouxa") }.to raise_error(ActiveRecord::AssociationTypeMismatch)
+    end
+
+    # it "returns :full if game is full" do
+    #   game = create(:game)
+    #   game.maximum = 1
+    #   user = create(:user)
+
+    #   result = game.join_game(user)
+
+    #   expect(result).to eq :full
+    # end
   end
 end
