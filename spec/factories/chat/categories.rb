@@ -1,10 +1,6 @@
 FactoryBot.define do
-  sequence :name do |n|
-    "Privado#{n}"
-  end
-
   factory :chat_category, class: 'Chat::Category' do
-    name
+    name { "Privado" }
     description { "Conversa entre duas pessoas" }
   end
 end
