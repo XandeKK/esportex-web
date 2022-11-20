@@ -83,6 +83,19 @@ RSpec.describe Game, type: :model do
     end
   end
 
+  describe "#participants" do
+    it "returns all participants" do
+      game = create(:game)
+      expect(game.participants).to be game.game_participants
+    end
+
+    it "should have organizer in participants" do
+      game = create(:game)
+      participants = game.participants
+      expect(participants.exists?(user: game.user)).to be true
+    end
+  end
+
   describe "#join_game" do
     it "returns :successfully_joined" do
       game = create(:game)

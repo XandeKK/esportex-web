@@ -36,6 +36,10 @@ class Game < ApplicationRecord
     end
   end
 
+  def participants
+    self.game_participants
+  end
+
   private
 
   def will_happen? time
