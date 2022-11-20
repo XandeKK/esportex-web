@@ -1,4 +1,6 @@
 class Chat::Room < ApplicationRecord
+  before_create :save_token
+
   has_one_attached :avatar_room do |attachable|
     attachable.variant :thumb, resize_to_limit: [100, 100]
     attachable.variant :normal, resize_to_limit: [500, 500]
@@ -17,6 +19,7 @@ class Chat::Room < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :bio, length: { maximum: 500 }
+  validates :token, presence: true, uniqueness: true
   validates :avatar_room, content_type: /\Aimage\/.*\z/,
     size: { less_than: 25.megabytes, message: "is too large" }
   validates :wallpaper_room, content_type: /\Aimage\/.*\z/,
@@ -39,4 +42,11 @@ class Chat::Room < ApplicationRecord
 
   # def full?
   # end
+
+  def save_token
+    self.token = loop do
+      random_token = SecureRandom.urlsafe_base64(24, false)
+      break random_token unless self.class.exists?(token: random_token)
+    end
+  end
 end

@@ -10,6 +10,7 @@ class CreateChat < ActiveRecord::Migration[7.0]
     create_table :chat_rooms do |t|
       t.string :name, null: false, limit: 50
       t.string :bio, limit: 500
+      t.string :token, limit: 32, null: false, unique: true
       t.references :chat_category, null: false, foreign_key: true
 
       t.timestamps

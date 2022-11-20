@@ -5,6 +5,9 @@ RSpec.describe Chat::Room, type: :model do
     subject { build(:chat_room) }
 
     it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:token) }
+
+    it { should validate_uniqueness_of(:token) }
 
     it { should validate_length_of(:name).is_at_most(50) }
     it { should validate_length_of(:bio).is_at_most(500) }

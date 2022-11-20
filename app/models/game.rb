@@ -1,5 +1,5 @@
 class Game < ApplicationRecord
-  after_save :add_organizer_game
+  after_create :add_organizer_game
 
   has_many_attached :images_game
 
