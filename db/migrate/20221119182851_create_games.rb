@@ -11,5 +11,20 @@ class CreateGames < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
+
+    create_table :game_participants do |t|
+      t.references :user, null: false, foreign_key: true
+      t.references :game, null: false, foreign_key: true
+
+      t.timestamps
+    end
+
+    create_table :game_comments do |t|
+      t.references :user, null: false, foreign_key: true
+      t.references :game, null: false, foreign_key: true
+      t.text :message
+
+      t.timestamps
+    end
   end
 end
