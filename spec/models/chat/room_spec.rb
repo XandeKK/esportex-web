@@ -15,11 +15,26 @@ RSpec.describe Chat::Room, type: :model do
   end
 
   describe "Associations" do
+    it { should have_one_attached(:avatar_room) }
+    it { should have_one_attached(:wallpaper_room) }
+    
     it { should belong_to(:chat_category) }
 
     it { should have_many(:chat_participants).dependent(:destroy) }
     it { should have_many(:chat_messages).dependent(:destroy) }
     it { should have_many(:chat_tracks).dependent(:destroy) }
+  end
+
+  describe "Active Storage" do
+    it { should validate_content_type_of(:avatar_room).allowing('image/png', 'image/gif', 'image/jpeg') }
+    it { should validate_content_type_of(:avatar_room).rejecting('text/plain', 'text/xml') }
+    it { should validate_size_of(:avatar_room).less_than(25.megabytes) }
+    it { should_not validate_size_of(:avatar_room).less_than(50.megabytes) }
+
+    it { should validate_content_type_of(:wallpaper_room).allowing('image/png', 'image/gif', 'image/jpeg') }
+    it { should validate_content_type_of(:wallpaper_room).rejecting('text/plain', 'text/xml') }
+    it { should validate_size_of(:wallpaper_room).less_than(25.megabytes) }
+    it { should_not validate_size_of(:wallpaper_room).less_than(50.megabytes) }
   end
 
   describe "#join_room" do

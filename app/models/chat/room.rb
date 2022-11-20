@@ -1,4 +1,11 @@
 class Chat::Room < ApplicationRecord
+  has_one_attached :avatar_room do |attachable|
+    attachable.variant :thumb, resize_to_limit: [100, 100]
+    attachable.variant :normal, resize_to_limit: [500, 500]
+  end
+
+  has_one_attached :wallpaper_room
+
   has_many :chat_participants, class_name: "Chat::Participant",
     foreign_key: :chat_room_id, dependent: :destroy
   has_many :chat_messages, class_name: "Chat::Message",
@@ -10,6 +17,10 @@ class Chat::Room < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :bio, length: { maximum: 500 }
+  validates :avatar_room, content_type: /\Aimage\/.*\z/,
+    size: { less_than: 25.megabytes, message: "is too large" }
+  validates :wallpaper_room, content_type: /\Aimage\/.*\z/,
+    size: { less_than: 25.megabytes, message: "is too large" }
 
   def join_room user
     # return :full if full?

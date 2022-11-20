@@ -1,6 +1,8 @@
 class Game < ApplicationRecord
   after_save :add_organizer_game
 
+  has_many_attached :images_game
+
   has_many :game_participants, class_name: "Game::Participant", dependent: :destroy
   has_many :game_comments, class_name: "Game::Comment", dependent: :destroy
   
@@ -12,6 +14,8 @@ class Game < ApplicationRecord
   validates :info, length: { maximum: 500 } 
   validates :start_date, presence: true, comparison: { less_than: :end_date }
   validates :end_date, presence: true, comparison: { greater_than: :start_date }
+  validates :images_game, content_type: /\Aimage\/.*\z/,
+    size: { less_than: 25.megabytes , message: 'is too large' }
 
   def status timezone
     time = Time.find_zone(timezone)

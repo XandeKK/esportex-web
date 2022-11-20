@@ -31,11 +31,20 @@ RSpec.describe Game, type: :model do
   end
 
   describe "Associations" do
+    it { should have_many_attached(:images_game) }
+
     it { should have_many(:game_participants).dependent(:destroy) }
     it { should have_many(:game_comments).dependent(:destroy) }
 
     it { should belong_to(:user) }
     it { should belong_to(:sport) }
+  end
+
+  describe "Active Storage" do
+    it { should validate_content_type_of(:images_game).allowing('image/png', 'image/gif', 'image/jpeg') }
+    it { should validate_content_type_of(:images_game).rejecting('text/plain', 'text/xml') }
+    it { should validate_size_of(:images_game).less_than(25.megabytes) }
+    it { should_not validate_size_of(:images_game).less_than(50.megabytes) }
   end
 
   describe "#status" do
