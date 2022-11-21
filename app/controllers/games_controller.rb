@@ -2,31 +2,52 @@ class GamesController < ApplicationController
   before_action :require_login, except: [:index, :show]
   before_action :set_sport, except: [:new, :create]
   before_action :redirect_invalid_sport, except: [:new, :create]
-  before_action :set_game, except: [:index, :new, :create]
-  before_action :redirect_invalid_game, except: [:index, :new, :create]
+  before_action :set_game, except: [:index, :new, :create, :show]
+  before_action :redirect_invalid_game, except: [:index, :new, :create, :show]
 
   def index
   end
 
   def show
+    @game = Game.find_by(id: params[:id])
+    redirect_invalid_game
   end
 
   def new
   end
 
   def create
+    @game = current_user.games.new(game_params)
+
+    if @game.save
+      redirect_to game_path(sport: @game.sport_id, id: @game.id)
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def edit
   end
 
   def update
+    if @game.update(game_params)
+      redirect_to game_path(sport: @game.sport_id, id: @game.id)
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
-  def delete
+  def destroy
+    if @game.destroy
+      redirect_to sports_path
+    end
   end
 
   private
+
+  def game_params
+    params.require(:game).permit(:sport_id, :title, :start_date, :end_date, :address, :info)
+  end
 
   def set_sport
     @sport = Sport.find_by(id: params[:sport])
