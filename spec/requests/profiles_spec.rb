@@ -17,6 +17,12 @@ RSpec.describe "Profiles", type: :request do
       get profile_path(create(:user))
       expect(response).to have_http_status(:success)
     end
+
+    it "redirects if does not exist" do
+      get profile_path("not_exist")
+      expect(response).to redirect_to("/")
+      expect(response).to have_http_status(:found)
+    end
   end
 
   describe "GET #edit" do

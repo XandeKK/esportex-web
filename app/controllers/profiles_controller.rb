@@ -4,6 +4,7 @@ class ProfilesController < ApplicationController
 
   def show
     @profile = User.find_by(id: params[:id])
+    redirect_to "/" unless @profile
   end
 
   def edit
