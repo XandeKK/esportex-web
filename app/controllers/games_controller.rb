@@ -6,6 +6,12 @@ class GamesController < ApplicationController
   before_action :redirect_invalid_game, except: [:index, :new, :create, :show]
 
   def index
+    # Não sei como que eu vou coletar informações necessárias.
+    # @games = Game.
+    #   where("sport_id = ?", params[:sport]).
+    #   where("start_date::date <= ?::date OR (start_date::date >= ?::date AND end_date::date <= ?::date)", params[:current_time],
+    #     params[:current_time], params[:current_time]).
+    #   near([params[:lat], params[:lon]], 10, units: :km)
   end
 
   def show
