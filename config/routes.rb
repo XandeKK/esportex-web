@@ -22,4 +22,7 @@ Rails.application.routes.draw do
   resources :games, path: '/sports/:sport/games', except: [:new, :create]
   get "/sport/games/new", to: "games#new", as: "new_game"
   post "/sport/games", to: "games#create", as: "create_game"
+
+
+  resources :profiles, path: "/", only: [:show, :edit, :update]
 end
