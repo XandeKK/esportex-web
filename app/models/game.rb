@@ -9,6 +9,9 @@ class Game < ApplicationRecord
   belongs_to :user
   belongs_to :sport
 
+  geocoded_by :address
+  after_validation :geocode
+
   validates :address, presence: true
   validates :title, length: { maximum: 100 } 
   validates :info, length: { maximum: 500 } 

@@ -5,6 +5,8 @@ class CreateGames < ActiveRecord::Migration[7.0]
       t.datetime :start_date, null: false
       t.datetime :end_date, null: false
       t.string :address, null: false
+      t.decimal :latitude
+      t.decimal :longitude
       t.string :info, limit: 500
       t.references :user, null: false, foreign_key: true
       t.references :sport, null: false, foreign_key: true

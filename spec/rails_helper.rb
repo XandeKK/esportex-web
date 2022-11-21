@@ -68,3 +68,18 @@ Shoulda::Matchers.configure do |config|
     with.library :rails
   end
 end
+
+
+Geocoder.configure(lookup: :test, ip_lookup: :test)
+Geocoder::Lookup::Test.add_stub(
+  "Lagarto", [
+    {
+      'coordinates'  => [-10.9141791, -37.6715308],
+      'address'      => 'Lagarto, Região Geográfica Imediata de Lagarto, Região Geográfica Intermediária de Itabaiana, Sergipe, Northeast Region, 49400-000, Brazil',
+      'state'        => 'Sergipe',
+      'state_code'   => 'SE',
+      'country'      => 'BRazil',
+      'country_code' => 'BR'
+    }
+  ]
+)

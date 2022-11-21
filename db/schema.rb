@@ -113,6 +113,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_20_172320) do
     t.datetime "start_date", null: false
     t.datetime "end_date", null: false
     t.string "address", null: false
+    t.decimal "latitude"
+    t.decimal "longitude"
     t.string "info", limit: 500
     t.bigint "user_id", null: false
     t.bigint "sport_id", null: false

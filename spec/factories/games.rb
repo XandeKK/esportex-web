@@ -5,7 +5,7 @@ FactoryBot.define do
     title { "Vamos jogar" }
     start_date { 5.hours.ago }
     end_date { 1.hours.after }
-    address { "Lá na puta que pariu" }
+    address { "Lagarto" }
     info { "Qualquer trouxa pode jogar" }
   end
 end
