@@ -18,4 +18,8 @@ Rails.application.routes.draw do
 
   get '/sport', to: redirect('/sports')
   get '/sports', to: 'sports#index'
+
+  resources :games, path: '/sports/:sport/games', except: [:new, :create]
+  get "/sport/games/new", to: "games#new", as: "new_game"
+  post "/sport/games", to: "games#create", as: "create_game"
 end
