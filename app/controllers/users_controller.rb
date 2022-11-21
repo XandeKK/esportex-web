@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class UsersController < Clearance::UsersController
 	private
 
   def user_from_params
