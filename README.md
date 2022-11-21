@@ -8,8 +8,6 @@
 
 <p align="center">
  <a href="#-sobre-o-projeto">Sobre</a> •
- <a href="#-funcionalidades">Funcionalidades</a> •
- <a href="#-como-executar-o-projeto">Como executar</a> • 
  <a href="#-tecnologias">Tecnologias</a> • 
  <a href="#-autor">Autor</a> • 
  <a href="#user-content--licença">Licença</a>
@@ -22,44 +20,12 @@ O projeto foi feito para ajudar os usuários a encontrarem outros usuários da m
 
 O projeto foi criado, porque eu sou um das pessoas que queria jogar um esporte, mas não conhecia niguém que jogam de tal esporte.
 
-
-## ⚙️ Funcionalidades
-
-- [x] Seguir/Seguindo outros usuário
-- [x] Criar uma partida
-- [x] Um mapa para visualizar as localizações dos jogos
-- [ ] Chat
-- [ ] Compartilhar os jogos em outras redes sociais
-- [ ] OAuth
-- [ ] Feed de atividades
----
-
 ## 🚀 Como executar o projeto
 
 ### Pré-requisitos
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
 [Git](https://git-scm.com), [Ruby 3.1.2](https://www.ruby-lang.org/en/),  [Ruby on Rails](https://rubyonrails.org/), [Postgresql](https://www.postgresql.org/), [Postgis](https://github.com/rgeo/activerecord-postgis-adapter), [ImageMagick](https://imagemagick.org/index.php) e/ou [libvips](https://github.com/libvips/libvips) 
-
-#### 🎲 Rodando o Backend (servidor)
-
-```bash
-
-# Clone este repositório
-$ git clone https://github.com/XandeKK/esportex-web.git
-
-# Acesse a pasta do projeto no terminal/cmd
-$ cd esportex-web
-
-# execute o código
-$ rails db:create db:migrate
-
-# Execute a aplicação em modo de desenvolvimento
-$ rails s
-
-# O servidor inciará na porta:3000 - acesse http://localhost:3000
-
-```
 
 ## 🛠 Tecnologias
 
